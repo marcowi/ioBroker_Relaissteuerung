@@ -1,44 +1,44 @@
-#Relaissteuerung mit ioBroker und dem Raspberry Pi
+# Relaissteuerung mit ioBroker und dem Raspberry Pi
 
-###Voraussetzungen
+### Voraussetzungen
 
-#####Installierte Adapter:
+##### Installierte Adapter:
 * rpi2
 * javascript
 * vis
 
-###Datenpunkte
+### Datenpunkte
 
 * javascript.0
     * Ventilsteuerung
         * Relais(n)
-            * #####dauer 
+            * ##### dauer 
             >Dauer, die ein Ventil geöffnet sein soll in Minuten
 
-            * #####stunde
+            * ##### stunde
             > Stunde, zu der das Ventil geöffnet werden soll (0 - 23)
 
-            * #####minute
+            * ##### minute
             > Minute, zu der das Ventil geöffnet werden soll (0 - 59)
 
-            * #####wartung
+            * ##### wartung
             > Ist dieser Wert auf true, wird das Relais nicht aktiviert (Standard: true)
 
-            * #####status
+            * ##### status
             > Sollzustand des Ventils
 
-            * #####gpio
+            * ##### gpio
             > Der Pin, an dem das Relais angeschlossen ist (BCM-Nummerierung)
-         * #####Refresh
+         * ##### Refresh
          > Bei Änderung auf true wird signalisiert, dass der Zeitplan neu erstellt werden soll, was zum Beispiel beim Speichern im vis der Fall ist
 
 
-###GPIO
+### GPIO
 In den Einstellungen des Adapters rpi2.0 müssen die entsprechenden GPIO aktiviert und auf OUT gesetzt werden. 
 
-###Skripte
+### Skripte
 
-####Erstellen der Datenpunkte
+#### Erstellen der Datenpunkte
 Zum Erstellen der Datenpunkte kann das folgende Skript genutzt werden. Dazu legt man im ioBroker unter "Skripte" ein neues Skript an, nennt es beispielsweise "Datenpunkte_erstellen" und fügt folgenden Code ein. Das Skript muss nur ein Mal ausgeführt und anschließend wieder gestoppt werden. Möchte man die Datenpunkte erneut erstellen, sollte man vorher den Punkt "javascript.0.Ventilsteuerung" löschen. 
 ```javascript 
 let count = 8;
@@ -57,7 +57,7 @@ createState("javascript.0.Ventilsteuerung.Refresh", false, {read: true, write: t
 log("Datenpunkte erstellt.", "info");
 ```
 
-####Relaissteuerung
+#### Relaissteuerung
 Das anzulegende Skript "Relaissteuerung" beinhaltet die Zeitplanung und setzt den Datenpunkt "status" eines Relais. Wird eine Änderung festgestellt, wird der entsprechende Pin geschaltet.
 ```javascript
 let scheduleList = [];
@@ -121,7 +121,7 @@ on('javascript.0.Ventilsteuerung.Refresh', function (obj) {
 });
 ``` 
 
-###Oberfläche
+### Oberfläche
 Zu Steuerung muss im vis eine neue "View" angelegt werden. Dazu geht man im Editiermodus von vis auf den Reiter "Views" und wählt "View importieren". Als Viewnamen kann man "Ventilsteuerung" oder Ähnliches angeben und folgenden Inhalt importieren.
 ```javascript
 {
