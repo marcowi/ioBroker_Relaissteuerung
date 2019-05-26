@@ -122,7 +122,7 @@ on('javascript.0.Ventilsteuerung.Refresh', function (obj) {
 ``` 
 
 ### Oberfläche
-Zu Steuerung muss im vis eine neue "View" angelegt werden. Dazu geht man im Editiermodus von vis auf den Reiter "Views" und wählt "View importieren". Als Viewnamen kann man "Ventilsteuerung" oder Ähnliches angeben und folgenden Inhalt importieren.
+Zur Steuerung muss im vis eine neue "View" angelegt werden. Dazu geht man im Editiermodus von vis auf den Reiter "Views" und wählt "View importieren". Als Viewnamen kann man "Ventilsteuerung" oder Ähnliches angeben und folgenden Inhalt importieren.
 ```javascript
 {
   "settings": {
